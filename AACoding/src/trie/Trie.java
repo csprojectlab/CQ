@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
+// This is the node for every character.
 class Node {
     Character data;
 	HashMap<Character, Node> children;
