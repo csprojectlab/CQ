@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="backtracking/" kind="src" path="AACoding/src"/>
+	<classpathentry kind="src" path="AACoding/src/backtracking"/>
+	<classpathentry kind="output" path="AACoding/bin"/>
+</classpath>

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 // This is the node for every character.
+// This line is added from another workspace.
 class Node {
     Character data;
 	HashMap<Character, Node> children;
