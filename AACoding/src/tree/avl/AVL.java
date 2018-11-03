@@ -1,13 +1,13 @@
 package tree.avl;
-
+/*
+ * Didn't consider the height factor in the node.
+ */
 class Node {
 	int data;
-	int height;
 	Node left;
 	Node right;
 	public Node(int data) {
 		this.data = data;
-		this.height = 1;
 	}
 	public String toString() {
 		return this.data + "";
@@ -20,7 +20,7 @@ public class AVL {
 	public int height(Node node) {
 		if(node == null)
 			return 0;
-		return node.height;
+		return 1 + Math.max(this.height(node.left), this.height(node.right));
 	}
 	
 	// Get the balance factor of node n.
@@ -31,17 +31,13 @@ public class AVL {
 	}
 	
 	public Node rotateRight(Node node) {
-		Node leftTree = node.left;
-		Node T = leftTree.right;
+		Node newRootNode = node.left;
+		Node T = newRootNode.right;
 		// Performing the rotation.
-		leftTree.right = node;
+		newRootNode.right = node;
 		node.left = T;
-		// Update the heights
-		leftTree.height = Math.max(this.height(leftTree.left), this.height(leftTree.right)) + 1;
-		node.height = Math.max(this.height(node.left), this.height(node.right)) + 1;
-
 		// Return the new root.
-		return leftTree;		
+		return newRootNode;		
 	}
 	
 	public Node rotateLeft(Node node) {
@@ -50,9 +46,6 @@ public class AVL {
 		// Perform the rotation.
 		rightTree.left = node;
 		node.right = T;
-		// Update the heights
-		rightTree.height = Math.max(this.height(rightTree.left), this.height(rightTree.right)) + 1;
-		node.height = Math.max(this.height(node.left), this.height(node.right)) + 1;
 		// Return the new root.
 		return rightTree;
 	}
@@ -70,9 +63,8 @@ public class AVL {
 		else   // Duplicate keys not allowed.
 			return node;
 		/*
-		 * 2). Update the height of this ancestor node.[height of the subtree]
+		 * 2). Update the heights if used.
 		 */
-		node.height = 1 + Math.max(this.height(node.left), this.height(node.right));
 		/*
 		 * 3). Get the balance factor of this node by checking whether this node became 
 		 * unbalanced.
@@ -115,16 +107,15 @@ public class AVL {
 		AVL tree = new AVL();
 		tree.root = tree.insert(tree.root, 13);
 		tree.root = tree.insert(tree.root, 10);
-//		tree.root = tree.insert(tree.root, 15);
+		tree.root = tree.insert(tree.root, 15);
 		tree.root = tree.insert(tree.root, 5);
 		tree.root = tree.insert(tree.root, 4);
-		System.out.println(tree.root.data);
-//		tree.root = tree.insert(tree.root, 11);
-//		tree.root = tree.insert(tree.root, 15);
-//		tree.root = tree.insert(tree.root, 16);
-//		tree.root = tree.insert(tree.root, 4);
-//		tree.root = tree.insert(tree.root, 6);
-//		tree.root = tree.insert(tree.root, 7);
+		tree.root = tree.insert(tree.root, 11);
+		tree.root = tree.insert(tree.root, 15);   // Testing the duplicate key.
+		tree.root = tree.insert(tree.root, 16);
+		tree.root = tree.insert(tree.root, 19);
+		tree.root = tree.insert(tree.root, 6);
+		tree.root = tree.insert(tree.root, 71);
 		tree.preOrder(tree.root);
 	}
 }
