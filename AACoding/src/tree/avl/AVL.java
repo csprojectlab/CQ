@@ -93,6 +93,69 @@ public class AVL {
 		return node;
 	}
 	
+	public Node minValueNode(Node node) {
+		if(node.left == null)
+			return node;
+		else return this.minValueNode(node.left);
+	}
+	
+	public Node delete(Node node, int data) {
+		/*
+		 * 1). Follow the standard BST operation of deletion.
+		 */
+		if(node == null)
+			return null;
+		else if(data < node.data)
+			node.left = this.delete(node.left, data);
+		else if(data > node.data) 
+			node.right = this.delete(node.right, data);
+		else {  // Found the node.
+			// Two cases: 1) One child 2) No child
+			if(node.left == null && node.right == null) {   // Leaf node.
+				node = null;
+			} else if(node.left == null) {   // Has only right child.
+				node = node.right;
+			} else if(node.right == null) {   // Has only left child.
+				node = node.left;
+			} else {   // Has both right and left child.
+				// Get the in-order successor[smallest in the right subtree.]
+				Node temp = this.minValueNode(node.right);
+				node.data = temp.data;  // Copy the content.
+				node.right = this.delete(node.right, temp.data);
+			}
+		}
+		// If tree is having only one node.
+		if(node == null)
+			return node;
+		/*
+		 * 2) Update the height if used.
+		 */
+		/*
+		 * 3) Get the balance factor of this node.
+		 */
+		int balance = this.getBalance(node);
+		/*
+		 * If unbalanced then there are 4 cases.
+		 */
+		// Left Left case
+		if(balance > 1 && this.getBalance(node.left) >= 0)
+			return this.rotateRight(node);
+		// Left Right case.
+		if(balance > 1 && this.getBalance(node.left) < 0) {
+			node.left = this.rotateLeft(node.left);
+			return this.rotateRight(node);
+		}
+		// Right Right case
+		if(balance < -1 && this.getBalance(node.right) <= 0)
+			return this.rotateLeft(node);
+		// Right Left case
+		if(balance < -1 && this.getBalance(node.right) > 0) {
+			node.right = this.rotateRight(node.right);
+			return this.rotateLeft(node);
+		}
+		return node;
+	}
+	
 	public void preOrder(Node node) {
 		if(node == null)
 			return;
@@ -101,6 +164,21 @@ public class AVL {
 			this.preOrder(node.left);
 		if(node.right != null)
 			this.preOrder(node.right);
+	}
+	
+	public boolean search(int data) {
+		return this.search(this.root, data) == null ? false : true;
+	}
+	
+	public Node search(Node node, int data) {
+		if(node == null)
+			return null;
+		if(data < node.data)
+			return this.search(node.left, data);
+		else if(data > node.data)
+			return this.search(node.right, data);
+		else 
+			return node;
 	}
 	
 	public static void main(String[] args) {
@@ -117,5 +195,10 @@ public class AVL {
 		tree.root = tree.insert(tree.root, 6);
 		tree.root = tree.insert(tree.root, 71);
 		tree.preOrder(tree.root);
+		System.out.println();
+		tree.root = tree.delete(tree.root, 16);
+		tree.root = tree.delete(tree.root, 19);
+		tree.preOrder(tree.root);
+		System.out.println(tree.search(15));
 	}
 }
