@@ -1,5 +1,10 @@
 package patterns;
 
+/**
+ * 
+ * @author Aridaman Singh Nandan
+ *
+ */
 public class P1 {
 
 	public static void makePattern(int rows) {
