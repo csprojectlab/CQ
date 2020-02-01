@@ -19,7 +19,8 @@ public class FormBiggestNumber {
 				String result2 = String.valueOf(o2) + String.valueOf(o1);
 				return result2.compareTo(result1);
 			}
-		});
+		});		
+		
 		String result = "";
 		for(Integer i : list)
 			result += i;

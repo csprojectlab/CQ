@@ -51,7 +51,7 @@ public class SubsetSumProblem {
 	public static void main(String[] args) {
 		SubsetSumProblem s = new SubsetSumProblem();
 		int[] arr = new int[] {2,3,7,8,10};
-		int total = 19;
+		int total = 11;
 		s.subsetSumProblem(arr, total);
 	}
 	

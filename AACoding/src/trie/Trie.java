@@ -4,17 +4,18 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 // This is the node for every character.
 // This line is added from another workspace.
 class Node {
     Character data;
-	HashMap<Character, Node> children;
+	Map<Character, Node> children;
 	boolean isTerminal;
 	public Node() {}
 	public Node(Character data, boolean isTerminal) {
 		this.data = data;
 		this.isTerminal = isTerminal;
-		this.children = new HashMap<Character, Node>();
+		this.children = new TreeMap<Character, Node>();
 	}
 }
 
