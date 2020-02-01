@@ -9,7 +9,6 @@ public class HashMap<K, V> {
 	public LinkedList<KVPair> bucketArray[];
 	public int size;
 	public static final int DEFAULT_SIZE = 10;
-
 	public HashMap() {
 		this(DEFAULT_SIZE);
 		System.out.println("Creating HashMap.");

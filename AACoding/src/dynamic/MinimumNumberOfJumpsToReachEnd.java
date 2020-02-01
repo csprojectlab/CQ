@@ -25,7 +25,7 @@ public class MinimumNumberOfJumpsToReachEnd {
 			k[i] = Integer.MAX_VALUE;
 		k[0] = 0;   // This is a kind of seed value.
 		parent[0] = -1;
-		for(int i = 1; i < k.length; i++) {
+		for(int i = 0; i < k.length; i++) {
 			for(int j = 0; j < i; j++) {
 				if(j + arr[j] >= i) {
 					if(k[i] > 1 + k[j]) {
